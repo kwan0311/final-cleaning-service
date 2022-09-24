@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-router@3.5.1/dist/vue-router.min.js"></script>
+  <script src="https://unpkg.com/http-vue-loader"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+    }
+
+    body {
+      background: linear-gradient(to right, #fdbd79, #7df2f9);
+      background: -ms-linear-gradient(to right, #fdbd79, #7df2f9);
+      background: -webkit-linear-gradient(to right, #fdbd79, #7df2f9);
+      background: -moz-linear-gradient(to right, #fdbd79, #7df2f9);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <router-view></router-view>
+  </div>
+</body>
+<script>
+  const routes = [
+    { path: '/', component: httpVueLoader('components/login.vue') },
+    {
+      path: '/home', component: httpVueLoader('components/Home.vue'), children: [
+        { path: '/home', component: httpVueLoader('components/index.vue'), name: 'Home' },
+        { path: '/service', component: httpVueLoader('components/Service.vue'), name: 'Service' },
+        { path: '/about', component: httpVueLoader('components/About.vue'), name: 'About' },
+      ]
+    },
+
+  ]
+  const router = new VueRouter({
+    routes
+  })
+  Vue.component('myfooter', {//Global Component
+    props: ['infos'],//props using
+    template: `
+    <div >
+    <p>{{infos}}</p>
+                 <div class="icons">
+        <a href="#"> <img src="../img/facebook.png" alt="" /></a>
+        <a href="#"> <img src="../img/github-fill.png" alt="" /></a>
+        <a href="#"><img src="../img/tiktok.png" alt="" /></a>
+        <a href="#"> <img src="../img/icon-kfckfc.png" alt="" /></a>
+      </div>
+      </div>
+             `
+  })
+  const app = new Vue({
+    router
+  }).$mount('#app');
+</script>
+
+</html>
