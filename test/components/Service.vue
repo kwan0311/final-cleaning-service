@@ -130,8 +130,8 @@ module.exports = {
         fun();
         setTimeout(() => {
           this.flag = true;
-        }, 1200);//prevent user click too quickly, 
-        //set the gap time to 1.2 seconds
+        }, 120);//to make sure user click softly, 
+        //set the gap time to 0.12 seconds
       }
     },
     PrevFun() {
